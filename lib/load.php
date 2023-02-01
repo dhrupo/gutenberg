@@ -90,7 +90,6 @@ require __DIR__ . '/compat/wordpress-6.2/block-editor.php';
 require __DIR__ . '/compat/wordpress-6.2/block-editor-settings.php';
 require __DIR__ . '/compat/wordpress-6.2/theme.php';
 require __DIR__ . '/compat/wordpress-6.2/widgets.php';
-require __DIR__ . '/compat/wordpress-6.2/formatting.php';
 
 // Experimental features.
 remove_action( 'plugins_loaded', '_wp_theme_json_webfonts_handler' ); // Turns off WP 6.0's stopgap handler for Webfonts API.
@@ -101,6 +100,7 @@ if ( ! class_exists( 'WP_HTML_Tag_Processor' ) ) {
 require __DIR__ . '/experimental/blocks.php';
 require __DIR__ . '/experimental/navigation-theme-opt-in.php';
 require __DIR__ . '/experimental/kses.php';
+require __DIR__ . '/experimental/formatting.php';
 
 // Fonts API.
 require __DIR__ . '/experimental/fonts-api/class-wp-fonts-provider.php';
