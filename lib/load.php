@@ -108,6 +108,7 @@ require __DIR__ . '/experimental/blocks.php';
 require __DIR__ . '/experimental/navigation-theme-opt-in.php';
 require __DIR__ . '/experimental/kses.php';
 require __DIR__ . '/experimental/formatting.php';
+require __DIR__ . '/experimental/l10n.php';
 
 // Fonts API.
 require __DIR__ . '/experimental/fonts-api/class-wp-fonts-provider.php';
