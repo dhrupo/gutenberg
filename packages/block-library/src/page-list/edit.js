@@ -84,15 +84,26 @@ function BlockContent( {
 		const parentPageDetails = pages.find(
 			( page ) => page.id === parentPageID
 		);
+
+		if ( parentPageDetails?.title?.rendered ) {
+			return (
+				<div { ...blockProps }>
+					<Warning>
+						{ sprintf(
+							// translators: %s: Page title.
+							__( 'Page List: "%s" page has no children.' ),
+							parentPageDetails.title.rendered
+						) }
+					</Warning>
+				</div>
+			);
+		}
+
 		return (
 			<div { ...blockProps }>
-				<Warning>
-					{ sprintf(
-						// translators: %s: Page title.
-						__( '"%s" page has no children.' ),
-						parentPageDetails.title.rendered
-					) }
-				</Warning>
+				<Notice status={ 'warning' } isDismissible={ false }>
+					{ __( 'Page List: Cannot retrieve Pages.' ) }
+				</Notice>
 			</div>
 		);
 	}
@@ -171,11 +182,6 @@ export default function PageListEdit( {
 		pages?.length > 0 &&
 		pages?.length <= MAX_PAGE_COUNT;
 
-	const convertToNavigationLinks = useConvertToNavigationLinks( {
-		clientId,
-		pages,
-	} );
-
 	const pagesByParentId = useMemo( () => {
 		if ( pages === null ) {
 			return new Map();
@@ -201,6 +207,12 @@ export default function PageListEdit( {
 			return accumulator;
 		}, new Map() );
 	}, [ pages ] );
+
+	const convertToNavigationLinks = useConvertToNavigationLinks( {
+		clientId,
+		pages,
+		parentPageID,
+	} );
 
 	const blockProps = useBlockProps( {
 		className: classnames( 'wp-block-page-list', {
